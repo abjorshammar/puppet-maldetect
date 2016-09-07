@@ -13,7 +13,7 @@ class maldetect::install inherits maldetect {
   exec { 'install_maldet':
     cwd     => '/tmp',
     command => "${command} && tar -xzf maldetect-current.tar.gz && cd maldetect* && /bin/bash install.sh",
-    creates => '/usr/local/maldetect'
+    creates => '/usr/local/maldetect',
     before  => File['configure_maldet'],
   }
 
