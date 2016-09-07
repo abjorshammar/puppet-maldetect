@@ -43,13 +43,13 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class maldetect (
-  $install              = false,
+  $install              = '',
   $proxy                = '',
   $proxy_port           = '8080',
-  $alert_email          = false,
+  $alert_email          = '',
   $alert_email_address  = 'root@localhost',
   $scan_dir             = '/home',
-  $cron                 = false,
+  $cron                 = '',
 ){
 
   if $alert_email {
@@ -60,9 +60,9 @@ class maldetect (
 
   # Setup cron
   if $cron {
-    $cron_status = absent
-  } else {
     $cron_status = file
+  } else {
+    $cron_status = absent
   }
 
   file {'maldetect-cron':
