@@ -68,6 +68,7 @@ class maldetect (
   file {'maldetect-cron':
     ensure  => $cron_status,
     path    => '/etc/cron.daily/maldet',
+    mode    => '0755',
     content => template('maldetect/maldet.erb'),
   }
 
