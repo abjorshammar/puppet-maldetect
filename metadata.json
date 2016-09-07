@@ -1,0 +1,13 @@
+{
+  "name": "subframe-maldetect",
+  "version": "0.1.0",
+  "author": "Andreas Borshammar",
+  "summary": "Manage Linux Malware Detect",
+  "license": "Apache-2.0",
+  "source": "https://github.com/abjorshammar/puppet-maldetect",
+  "project_page": "https://github.com/abjorshammar/puppet-maldetect",
+  "issues_url": "https://github.com/abjorshammar/puppet-maldetect/issues",
+  "dependencies": [
+  ],
+  "data_provider": null
+}
