@@ -43,13 +43,13 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class maldetect (
-  $install              = '',
-  $proxy                = '',
+  $install              = undef,
+  $proxy                = undef,
   $proxy_port           = '8080',
-  $alert_email          = '',
+  $alert_email          = undef,
   $alert_email_address  = 'root@localhost',
   $scan_dir             = '/home',
-  $cron                 = '',
+  $cron                 = undef,
 ){
 
   if $alert_email {
