@@ -43,7 +43,7 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class maldetect (
-  $install              = undef,
+  $install              = true,
   $proxy                = undef,
   $proxy_port           = '8080',
   $alert_email          = undef,
@@ -65,12 +65,28 @@ class maldetect (
     $cron_status = absent
   }
 
+  if $install {
+    include maldetect::install
+    Class[maldetect::install] -> Class[maldetect]
+  }
+
+  # Manage configuration
+  file { 'configure_maldet':
+    path    => '/usr/local/maldetect/conf.maldet',
+    mode    => '0600',
+    owner   => 'root',
+    group   => 'root',
+    content => template('maldetect/conf.maldet.erb'),
+  }
+
+  # Manage cron
   file {'maldetect-cron':
     ensure  => $cron_status,
     path    => '/etc/cron.daily/maldet',
     mode    => '0755',
+    owner   => 'root',
+    group   => 'root',
     content => template('maldetect/maldet.erb'),
   }
-
 
 }

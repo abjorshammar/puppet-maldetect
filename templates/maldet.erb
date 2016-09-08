@@ -44,11 +44,6 @@ if [ "$find" ]; then
         done
 fi
 
-if [ "$autoupdate_version" == "1" ] || [ "$autoupdate_signatures" == "1" ]; then
-        # sleep for random 1-999s interval to better distribute upstream load
-        sleep $(echo $RANDOM | cut -c1-3) >> /dev/null 2>&1
-fi
-
 if [ "$autoupdate_version" == "1" ]; then
         # check for new release version
         $inspath/maldet -d >> /dev/null 2>&1

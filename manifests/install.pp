@@ -9,27 +9,20 @@ class maldetect::install inherits maldetect {
     $command = '/usr/bin/wget http://www.rfxn.com/downloads/maldetect-current.tar.gz'
   }
 
+  $path = '/bin:/sbin:/usr/bin:/usr/sbin'
+
   # Install
   exec { 'install_maldet':
+    path    => $path,
     cwd     => '/tmp',
     command => "${command} && tar -xzf maldetect-current.tar.gz && cd maldetect* && /bin/bash install.sh",
     creates => '/usr/local/maldetect',
-    before  => File['configure_maldet'],
-  }
-
-  # Configure
-  file { 'configure_maldet':
-    path    => '/usr/local/maldetect/conf.maldet',
-    content => template('maldetect/conf.maldet.erb'),
-    mode    => '0600',
-    owner   => 'root',
-    group   => 'root',
     before  => Exec['install_maldet_cleanup'],
   }
 
   # Cleanup
   exec { 'install_maldet_cleanup':
-    path    => '/bin:/sbin:/usr/bin:/usr/sbin',
+    path    => $path,
     command => 'rm -rf /tmp/maldetect*',
     onlyif  => 'test -d /tmp/maldetect*',
   }
